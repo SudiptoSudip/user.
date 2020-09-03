@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Users Information</title>
+</head>
+<body>
+    
+    <button login="showInfo">Load GitHub User</button>
+    <h1>Github Users</h1>
+    <div login="showme"></div>
+    <script>
+        document.getElementById("showInfo").addEventListener('click', onProcess);
+
+        function onProcess(){
+            var req = new XMLHttpRequest();
+            req.open('GET', 'support.json', true);
+            req.onload = function() {
+                if(req.status==200){
+                    var dataItem = JSON.parse(req.responseText);
+                    var display = '';
+                    display += '<ol>'+
+                        '<li>login: '+dataItem.login+'</li>'+
+                        '<li>id: '+dataItem.id+'</li>'+
+                        '<li>node_id: '+dataItem.node_id+'</li>'+
+                        '<li>avatar_url: '+dataItem.avatar_url+'</li>'+
+                        '<li>gravatar_id: '+dataItem.gravatar_id+'</li>'+
+                        '<li>url: '+dataItem.url+'</li>'+
+                        '<li>html_url: '+dataItem.html_url+'</li>'+
+                        '<li>followers_url: '+dataItem.followers_url+'</li>'+
+                        '<li>following_url: '+dataItem.following_url+'</li>'+
+                        '<li>gists_url: '+dataItem.gists_url+'</li>'+
+                        '<li>starred_url: '+dataItem.starred_url+'</li>'+
+                        '<li>subscriptions_url: '+dataItem.subscriptions_url+'</li>'+
+                        '<li>organizations_url: '+dataItem.organizations_url+'</li>'+
+                        '<li>repos_url: '+dataItem.repos_url+'</li>'+
+                        '<li>events_url: '+dataItem.events_url+'</li>'+
+                        '<li>received_events_url: '+dataItem.received_events_url+'</li>'+
+                        '<li>type: '+dataItem.type+'</li>'+
+                        '<li>site_admin: '+dataItem.site_admin+'</li>'+
+                        '</ol>';
+            document.getElementById('showme').innerHTML = display;
+
+                }
+                
+            } 
+            req.send();
+        }
+    </script>
+</body>
+</html>
